@@ -25,7 +25,7 @@ import java.time.LocalDate;
  *
  * @author khdx
  */
-@WebServlet(name = "UsuarioServlet", urlPatterns ={"/UsuarioServlet"})
+@WebServlet(name = "UsuarioRegisterServlet", urlPatterns ={"/UsuarioRegisterServlet"})
 public class UsuarioRegisterServlet extends HttpServlet{
     private UsuarioServicio usuarioServicio;
 

@@ -7,25 +7,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./assets/css/register.css"/>
         <title>Agregar Usuario</title>
 </head>
 <body>
-    <h2>Agregar Usuario</h2>
-    <form action="UsuarioServlet" method="POST">
-
-        <label for="nombre">nombre</label><br>
+    
+    <form action="UsuarioRegisterServlet" method="POST"> 
+        <h2>Agregar Usuario</h2>
+        <label for="nombre">nombre</label>
         <input type="text" id="nombre" name="nombre"><br><br>
 
-        <label for="correo">Correo</label><br>
+        <label for="correo">Correo</label>
         <input type="text" id="correo" name="correo" required><br><br>
 
-        <label for="contrasena">Contraseña</label><br>
+        <label for="contrasena">Contraseña</label>
         <input type="password" id="contrasena" name="contrasena" required><br><br>
         
         <label for="idtipousuario">Tipo de usuario</label>
         <select name="idtipousuario" required>
-            <option value="2">2</option>
-            <option value="1">1</option>
+            <option value="2">Conductor</option>
+            <option value="3">Pasajero</option>
         </select><br>
 
 

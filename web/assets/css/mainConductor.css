@@ -1,0 +1,60 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : 21/11/2024, 1:33:45 a. m.
+    Author     : khdx
+*/
+
+/* Paleta de colores:
+   - Fondo principal: #e7f9e7 (verde claro)
+   - Texto: #2d6a2d (verde oscuro)
+   - Botones: #4caf50 (verde medio)
+   - Fondo del botón al pasar: #45a045 (verde más oscuro)
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e7f9e7;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+h1 {
+    color: #2d6a2d;
+    margin-bottom: 20px;
+}
+
+#menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaciado entre botones */
+    margin-top: 20px;
+}
+
+form {
+    margin: 0;
+}
+
+button {
+    background-color: #4caf50;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 200px; /* Ancho fijo para los botones */
+}
+
+button:hover {
+    background-color: #45a045;
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}

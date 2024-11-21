@@ -25,6 +25,8 @@ public class UsuarioLoginServlet extends HttpServlet {
 
     public UsuarioLoginServlet() {
         this.userService = new UsuarioServicio();
+        this.uDTO = new UsuarioDTO();
+         
     }
     
     
@@ -83,8 +85,23 @@ public class UsuarioLoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String correo = request.getParameter("email");
         String contrasena = request.getParameter("password");
-        if (userService.loguear(correo, contrasena)!= null) {
-            request.getRequestDispatcher("main.jsp").forward(request, response);
+        uDTO.setUsuarioToSend(userService.loguear(correo, contrasena).getUsuarioToSend());
+        if (uDTO != null) {
+            request.setAttribute("Usuario", uDTO.getUsuarioToSend());  
+            switch (uDTO.getUsuarioToSend().getTipoUsuario()) {
+                case 3:          
+                    request.getRequestDispatcher("main.jsp").forward(request, response);
+                    break;
+                case 2:
+                    request.getRequestDispatcher("mainConductor.jsp").forward(request, response);
+                    break;
+                    
+                case 1:
+                    
+                    break;
+                default:
+                    throw new AssertionError();
+            }
         }else{
             request.getRequestDispatcher("index.html").forward(request, response);
 
