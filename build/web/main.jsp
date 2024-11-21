@@ -9,9 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inicio</title>
+        <link rel="stylesheet" href="assets/css/mainConductor.css"/>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello ${Usuario.getNombre()}!</h1>
+        <h1>Hello ... ${Usuario.getNombre()}!</h1>
+        <div id="menu">
+            <form action=""><button type="submit">Reservar servicio</button></form>
+            <form action=""><button type="submit">Ver perfil</button></form>
+        </div>
     </body>
 </html>

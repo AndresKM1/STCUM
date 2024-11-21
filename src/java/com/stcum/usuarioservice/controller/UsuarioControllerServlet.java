@@ -18,8 +18,9 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author khdx
  */
-@WebServlet(name = "UsuarioLoginServlet", urlPatterns = {"/UsuarioLoginServlet"})
-public class UsuarioLoginServlet extends HttpServlet {
+@WebServlet(name = "UsuarioControllerServlet", urlPatterns = {"/UsuarioControllerServlet"})
+public class UsuarioControllerServlet extends HttpServlet {
+    public class UsuarioLoginServlet extends HttpServlet {
     private UsuarioServicio userService;
     private UsuarioDTO uDTO;
 
@@ -28,8 +29,6 @@ public class UsuarioLoginServlet extends HttpServlet {
         this.uDTO = new UsuarioDTO();
          
     }
-    
-    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,10 +47,10 @@ public class UsuarioLoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UsuarioLoginServlet</title>");
+            out.println("<title>Servlet UsuarioControllerServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UsuarioLoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UsuarioControllerServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -83,34 +82,7 @@ public class UsuarioLoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String correo = request.getParameter("email");
-        String contrasena = request.getParameter("password");
-        uDTO.setUsuarioToSend(userService.loguear(correo, contrasena).getUsuarioToSend());
-        if (uDTO != null) {
-            request.setAttribute("Usuario", uDTO.getUsuarioToSend());  
-            switch (uDTO.getUsuarioToSend().getTipoUsuario()) {
-                case 3://Pasajero          
-                    request.getRequestDispatcher("main.jsp").forward(request, response);
-                    break;
-                case 2://Conductor
-                    request.getRequestDispatcher("mainConductor.jsp").forward(request, response);
-                    break;
-                    
-                case 1://Admin
-                    
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-        }else{
-            request.getRequestDispatcher("index.html").forward(request, response);
-
-        }
-
-        
-        if (true) {
-            
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -123,4 +95,5 @@ public class UsuarioLoginServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+}
 }

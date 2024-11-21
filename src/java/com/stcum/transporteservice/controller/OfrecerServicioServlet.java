@@ -2,10 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.stcum.usuarioservice.controller;
+package com.stcum.transporteservice.controller;
 
-import com.stcum.usuarioservice.dto.UsuarioDTO;
-import com.stcum.usuarioservice.service.UsuarioServicio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,18 +16,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author khdx
  */
-@WebServlet(name = "UsuarioLoginServlet", urlPatterns = {"/UsuarioLoginServlet"})
-public class UsuarioLoginServlet extends HttpServlet {
-    private UsuarioServicio userService;
-    private UsuarioDTO uDTO;
-
-    public UsuarioLoginServlet() {
-        this.userService = new UsuarioServicio();
-        this.uDTO = new UsuarioDTO();
-         
-    }
-    
-    
+@WebServlet(name = "OfrecerServicioServlet", urlPatterns = {"/OfrecerServicioServlet"})
+public class OfrecerServicioServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,10 +36,10 @@ public class UsuarioLoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UsuarioLoginServlet</title>");
+            out.println("<title>Servlet OfrecerServicioServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UsuarioLoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OfrecerServicioServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -83,34 +71,7 @@ public class UsuarioLoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String correo = request.getParameter("email");
-        String contrasena = request.getParameter("password");
-        uDTO.setUsuarioToSend(userService.loguear(correo, contrasena).getUsuarioToSend());
-        if (uDTO != null) {
-            request.setAttribute("Usuario", uDTO.getUsuarioToSend());  
-            switch (uDTO.getUsuarioToSend().getTipoUsuario()) {
-                case 3://Pasajero          
-                    request.getRequestDispatcher("main.jsp").forward(request, response);
-                    break;
-                case 2://Conductor
-                    request.getRequestDispatcher("mainConductor.jsp").forward(request, response);
-                    break;
-                    
-                case 1://Admin
-                    
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-        }else{
-            request.getRequestDispatcher("index.html").forward(request, response);
-
-        }
-
-        
-        if (true) {
-            
-        }
+        processRequest(request, response);
     }
 
     /**

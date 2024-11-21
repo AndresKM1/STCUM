@@ -15,8 +15,16 @@
     <body>
         <h1>Hello chofer ... ${Usuario.getNombre()}!</h1>
         <div id="menu">
-            <form action=""><button type="submit">Ofrecer servicio</button></form>
-            <form action=""><button type="submit">Listar servicios</button></form>
+           
+
+            
+            <form action="" method="POST">
+                <button type="submit">Ofrecer servicio</button>
+           
+            </form>
+            <form action="" method="POST">
+                <button type="submit">Listar mis servicios</button>
+            </form>
         </div>
     </body>
 </html>
