@@ -1,0 +1,84 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : 20/11/2024, 4:33:13 p. m.
+    Author     : khdx
+*/
+/* Paleta de colores:
+   - Fondo principal: #e7f9e7 (verde claro)
+   - Bordes y botones: #4caf50 (verde medio)
+   - Texto principal: #2d6a2d (verde oscuro)
+   - Fondo del botón al pasar: #45a045 (tono más oscuro de verde medio)
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e7f9e7;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-container h1 {
+    color: #2d6a2d;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #2d6a2d;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #4caf50;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #f9fff9;
+    color: #2d6a2d;
+}
+
+.form-group input:focus {
+    border-color: #45a045;
+    outline: none;
+}
+
+.btn-login {
+    background-color: #4caf50;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.btn-login:hover {
+    background-color: #45a045;
+}
+

@@ -4,6 +4,8 @@
  */
 package entidades;
 
+import com.stcum.usuarioservice.model.Usuario;
+
 /**
  *
  * @author Milo
