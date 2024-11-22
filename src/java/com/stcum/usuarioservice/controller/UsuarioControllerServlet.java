@@ -96,17 +96,26 @@ public class UsuarioControllerServlet extends HttpServlet {
 
                 case "conductorOfrecer":
                     request.setAttribute("Usuario", uDTO.getUsuarioToSend());  
-
-                    //requestGetAttr(request);
                     request.getRequestDispatcher("OfrecerServicio.jsp").forward(request, response);
                     
                     break;
-
-                case "conductorListar":
-                    requestGetAttr(request);
+                    
+                case "conductorRegistrarVehiculo":
+                    request.setAttribute("Usuario", uDTO.getUsuarioToSend());  
+                    request.getRequestDispatcher("RegistrarTransporte.jsp").forward(request, response);
                     break;
+                    
+                    
+                case "conductorListar":
+                    request.setAttribute("Usuario", uDTO.getUsuarioToSend());  
+                    requestGetAttr(request, uDTO);
+                    break;
+                    
+                    
                 default:
                     throw new AssertionError();
+                    
+                
             }
 
         }
@@ -121,7 +130,8 @@ public class UsuarioControllerServlet extends HttpServlet {
             return "Short description";
         }// </editor-fold>
         
-        private void requestGetAttr(HttpServletRequest request){
+        private void requestGetAttr(HttpServletRequest request, UsuarioDTO dto){
+                        request.setAttribute("Usuario", dto.getUsuarioToSend());  
 
         }
         
@@ -130,7 +140,7 @@ public class UsuarioControllerServlet extends HttpServlet {
             String contrasena = request.getParameter("password");
             uDTO.setUsuarioToSend(userService.loguear(correo, contrasena).getUsuarioToSend());
             request.setAttribute("Usuario", uDTO.getUsuarioToSend());  
-
+            //requestGetAttr(request, uDTO);
             if (uDTO != null) {
                 switch (uDTO.getUsuarioToSend().getTipoUsuario()) {
                     case 3://Pasajero          

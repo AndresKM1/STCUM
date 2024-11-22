@@ -29,7 +29,7 @@
         <textarea id="condiciones" name="condiciones" required></textarea><br><br>
 
         <label for="idUsuario">ID de Usuario</label>
-        <input type="number" id="idUsuario" name="idUsuario" required><br><br>
+        <input type="text" id="idUsuario" name="idUsuario" value="${Usuario.getIdUsuario()}" required disabled="True"><br><br>
 
         <button type="submit">Registrar Transporte</button>
     </form>

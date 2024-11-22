@@ -56,6 +56,7 @@ public class UsuarioDAO {
             ps.setString(2, contrasena);
             result = ps.executeQuery();
             while(result.next()){
+                molde.setIdUsuario(result.getInt("idUsuario"));
                 molde.setNombre(result.getString("nombre"));
                 molde.setCorreo(result.getString("correo"));
                 molde.setContrasena(result.getString("contrasena"));

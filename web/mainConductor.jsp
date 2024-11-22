@@ -16,7 +16,9 @@
         <h1>Hello chofer ... ${Usuario.getNombre()}!</h1>
         <div id="menu">
            
-
+            <form action="" method="POST">
+                <button type="submit" name="action" value="conductorRegistrarVehiculo">Registrar vehiculo</button>
+            </form>
             
             <form action="" method="POST">
                 <button type="submit" name="action" value="conductorOfrecer">Ofrecer servicio</button>
