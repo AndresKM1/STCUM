@@ -17,7 +17,7 @@ public class TransporteService {
         this.tDAO = new TransporteDAO();
     }
     
-    public void registrarTransporte(String tipovehiculo, int capacidad, String condicionesgenerales, int idUsuario){
-        tDAO.insertarTransporte(tipovehiculo, capacidad, condicionesgenerales, idUsuario);
+    public void registrarTransporte(String marca, String modelo, int capacidad, String condicionesgenerales, int idUsuario){
+        tDAO.insertarTransporte(marca, modelo, capacidad, condicionesgenerales, idUsuario);
     }
 }

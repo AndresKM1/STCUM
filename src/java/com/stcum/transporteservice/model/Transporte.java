@@ -10,15 +10,17 @@ package com.stcum.transporteservice.model;
  */
 public class Transporte {
     private int idTransporte;
-    private String tipoVehiculo;
+    private String marca;
+    private String modelo;
     private int capacidad;
     private String condicionesGenerales;
     private int idUsuario;
 
     // Constructor
-    public Transporte(int idTransporte, String tipoVehiculo, int capacidad, String condicionesGenerales, int idUsuario) {
+    public Transporte(int idTransporte, String marca, String modelo, int capacidad, String condicionesGenerales, int idUsuario) {
         this.idTransporte = idTransporte;
-        this.tipoVehiculo = tipoVehiculo;
+        this.marca = marca;
+        this.modelo = modelo;
         this.capacidad = capacidad;
         this.condicionesGenerales = condicionesGenerales;
         this.idUsuario = idUsuario;
@@ -33,12 +35,20 @@ public class Transporte {
         this.idTransporte = idTransporte;
     }
 
-    public String getTipoVehiculo() {
-        return tipoVehiculo;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setTipoVehiculo(String tipoVehiculo) {
-        this.tipoVehiculo = tipoVehiculo;
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     public int getCapacidad() {

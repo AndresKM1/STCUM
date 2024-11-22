@@ -76,13 +76,14 @@ public class TransporteRegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    String tipoVehiculo = request.getParameter("tipo");
+    String marca = request.getParameter("marca");
+    String modelo = request.getParameter("modelo");
     int capacidad = Integer.parseInt(request.getParameter("capacidad")); // Asegúrate de que el formulario tenga este campo
     String condicionesGenerales = request.getParameter("condiciones"); // Asegúrate de que el formulario tenga este campo
     int idUsuario = Integer.parseInt(request.getParameter("idUsuario")); // Asegúrate de que el formulario tenga este campo
 
     // Llamar a insertarTransporte
-   transporteService.registrarTransporte(tipoVehiculo, capacidad, condicionesGenerales, idUsuario);
+   transporteService.registrarTransporte(marca, modelo, capacidad, condicionesGenerales, idUsuario);
     }
 
     /**

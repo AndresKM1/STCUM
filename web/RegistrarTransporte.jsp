@@ -15,9 +15,12 @@
 <body>
     <form action="TransporteRegisterServlet" method="POST">
         <h2>Registrar Transporte</h2>
-
-        <label for="tipo">Tipo de Vehículo</label>
-        <input type="text" id="tipo" name="tipo" required><br><br>
+        
+        <label for="tipo">Marca</label>
+        <input type="text" id="marca" name="marca" required><br><br>
+        
+        <label for="tipo">Modelo</label>
+        <input type="text" id="modelo" name="modelo" required><br><br>
 
         <label for="capacidad">Capacidad</label>
         <input type="number" id="capacidad" name="capacidad" required><br><br>
