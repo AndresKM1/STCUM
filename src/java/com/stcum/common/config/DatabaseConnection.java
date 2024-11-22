@@ -26,7 +26,7 @@ public class DatabaseConnection {
     
 
     public DatabaseConnection(String DB_URL, String DB_USER, String DB_PASSWORD) throws SQLException {
-        conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
     }
     
 }

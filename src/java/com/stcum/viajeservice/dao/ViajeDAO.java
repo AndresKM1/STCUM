@@ -51,11 +51,10 @@ public class ViajeDAO {
     
    
     String sql = "SELECT * FROM viajes"; 
-    try (
-            DatabaseConnection dbc = new DatabaseConnection(URL, USER, PASSWORD);
+    try     {DatabaseConnection dbc = new DatabaseConnection(URL, USER, PASSWORD);
             Connection conn = dbc.getConn();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = (ResultSet) ps.executeQuery()) {
+            ResultSet rs = (ResultSet) ps.executeQuery();
         
         while (rs.next()) {
             int idViaje = rs.getInt("idViaje");

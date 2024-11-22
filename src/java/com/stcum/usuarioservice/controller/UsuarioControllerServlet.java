@@ -96,7 +96,7 @@ public class UsuarioControllerServlet extends HttpServlet {
 
                 case "conductorOfrecer":
                     request.setAttribute("Usuario", uDTO.getUsuarioToSend());  
-                    request.getRequestDispatcher("OfrecerServicio.jsp").forward(request, response);
+                    request.getRequestDispatcher("AgregarViaje.jsp").forward(request, response);
                     
                     break;
                     
@@ -107,8 +107,9 @@ public class UsuarioControllerServlet extends HttpServlet {
                     
                     
                 case "conductorListar":
-                    request.setAttribute("Usuario", uDTO.getUsuarioToSend());  
-                    requestGetAttr(request, uDTO);
+                    request.setAttribute("Usuario", uDTO.getUsuarioToSend()); 
+                    request.getRequestDispatcher("RegistrarTransporte.jsp").forward(request, response);
+                    
                     break;
                     
                     
