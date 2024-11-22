@@ -22,18 +22,18 @@ public class TransporteDAO {
     private ResultSet result;
     
     public void insertarTransporte(String marca, String modelo , int capacidad, String condicionesgenerales, int idUsuario) {
-        String sql = "INSERT INTO transportes ( marca, modelo, capacidad, condicionesgenerales, idUsuario) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO transportes ( capacidad, condicionesgenerales, idUsuario, marca, modelo) VALUES (?, ?, ?, ?, ?)";
 
         try {
             DatabaseConnection dbc = new DatabaseConnection(URL, USER, PASSWORD);
             Connection conn = dbc.getConn();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, idUsuario);
-            ps.setString(2, marca);
-            ps.setString(3, modelo);
-            ps.setInt(4, capacidad);
-            ps.setString(5, condicionesgenerales);
+            ps.setInt(1, capacidad);
+            ps.setString(2, condicionesgenerales);
+            ps.setInt(3, idUsuario);
+            ps.setString(4, marca);
+            ps.setString(5, modelo);
     
  
             ps.executeUpdate();
