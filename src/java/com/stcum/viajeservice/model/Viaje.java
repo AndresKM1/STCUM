@@ -18,17 +18,17 @@ public class Viaje {
     private String destino;
     private Timestamp horaSalida;
     private String estado;
-    private Transporte transporte;
+    private int idTransporte;
     private double precio;
     
     // Constructor
-    public Viaje(int idViaje, String origen, String destino, Timestamp horaSalida, String estado, Transporte transporte, double precio) {
+    public Viaje(int idViaje, String origen, String destino, Timestamp horaSalida, String estado, int idTransporte, double precio) {
         this.idViaje = idViaje;
         this.origen = origen;
         this.destino = destino;
         this.horaSalida = horaSalida;
         this.estado = estado;
-        this.transporte = transporte;
+        this.idTransporte = idTransporte;
         this.precio = precio;
     }
 
@@ -73,13 +73,15 @@ public class Viaje {
         this.estado = estado;
     }
 
-    public Transporte getTransporte() {
-        return transporte;
+    public int getIdTransporte() {
+        return idTransporte;
     }
 
-    public void setTransporte(Transporte transporte) {
-        this.transporte = transporte;
+    public void setIdTransporte(int idTransporte) {
+        this.idTransporte = idTransporte;
     }
+
+   
 
     public double getPrecio() {
         return precio;

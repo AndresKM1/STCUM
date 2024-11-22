@@ -7,10 +7,14 @@ package com.stcum.viajeservice.dao;
 
 import com.stcum.common.config.DatabaseConnection;
 import com.stcum.transporteservice.model.Transporte;
+import com.stcum.viajeservice.model.Viaje;
+import jakarta.resource.cci.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,7 +25,7 @@ public class ViajeDAO {
     private static final String USER = "postgres";
     private static final String PASSWORD = "44IV100";
     
-    public void insertarViaje(String origen, String destino, Timestamp horaSalida, String estado, Transporte transporte, double precio){
+    public void insertarViaje(String origen, String destino, Timestamp horaSalida, String estado, int idTransporte, double precio){
     String sql = "INSERT INTO viajes ( origen, destino, horaSalida, estado, transporte, precio) VALUES (?, ?, ?, ?, ?, ?)";
      try {
             DatabaseConnection dbc = new DatabaseConnection(URL, USER, PASSWORD);
@@ -32,7 +36,7 @@ public class ViajeDAO {
             ps.setString(2, destino);
             ps.setTimestamp(3, horaSalida);
             ps.setString(4, estado);
-            ps.setObject(5, transporte);
+            ps.setInt(5, idTransporte);
             ps.setDouble(6, precio);
             
             ps.executeUpdate();
@@ -41,6 +45,35 @@ public class ViajeDAO {
             e.printStackTrace();
         }
     }
+
+    public List<Viaje> obtenerTodosLosViajes() {
+         List<Viaje> listaViajes = new ArrayList<>();
+    
+   
+    String sql = "SELECT * FROM viajes"; 
+    try (
+            DatabaseConnection dbc = new DatabaseConnection(URL, USER, PASSWORD);
+            Connection conn = dbc.getConn();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = (ResultSet) ps.executeQuery()) {
+        
+        while (rs.next()) {
+            int idViaje = rs.getInt("idViaje");
+            String origen = rs.getString("origen");
+            String destino = rs.getString("destino");
+            Timestamp horaSalida = rs.getTimestamp("horaSalida");
+            String estado = rs.getString("estado");
+            int idTransporte = rs.getInt("idTransporte");
+            double precio = rs.getDouble("precio");
+
+            
+            Viaje viaje = new Viaje(idViaje, origen, destino, horaSalida, estado, idTransporte, precio);
+            listaViajes.add(viaje);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Manejo de excepciones
+    }
+    return listaViajes;
+    }
     
 }
-

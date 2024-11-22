@@ -16,6 +16,8 @@ public class DatabaseConnection {
     private static final String URL = "jdbc:postgresql://localhost:5432/stcumV2";
     private static final String USER = "postgres";
     private static final String PASSWORD = "44IV100";
+
+    
     private final Connection conn;
     
     public Connection getConn() {

@@ -6,11 +6,13 @@ package com.stcum.viajeservice.service;
 
 import com.stcum.transporteservice.model.Transporte;
 import com.stcum.viajeservice.dao.ViajeDAO;
+import com.stcum.viajeservice.model.Viaje;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  *
@@ -22,8 +24,8 @@ public class ViajeServicio {
     public ViajeServicio() {
         this.viajeDAO = new ViajeDAO();
     }
-    public void agregarViaje(String origen, String destino, Timestamp horaSalida, String estado, Transporte transporte, double precio){
-        viajeDAO.insertarViaje(origen, destino, horaSalida, estado, transporte, precio);
+    public void agregarViaje(String origen, String destino, Timestamp horaSalida, String estado, int idTransporte, double precio){
+        viajeDAO.insertarViaje(origen, destino, horaSalida, estado, idTransporte, precio);
     }
 
     public void crearViaje(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,30 +34,21 @@ public class ViajeServicio {
     String destino = request.getParameter("destino");
     Timestamp horaSalida = Timestamp.valueOf(request.getParameter("horaSalida"));
     String estado = request.getParameter("estado");
+    int idTransporte = Integer.parseInt(request.getParameter("idTransporte"));
     double precio = Double.parseDouble(request.getParameter("precio"));
     
     
-    // Obtener parámetros para el Transporte
-    int idTransporte = Integer.parseInt(request.getParameter("idTransporte")); // ID del transporte
-    String marca = request.getParameter("marca");
-    String modelo = request.getParameter("modelo");
-    int capacidad = Integer.parseInt(request.getParameter("capacidad"));
-    String condicionesGenerales = request.getParameter("condicionesGenerales");
-    int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-    
-    
-    // Crear el objeto Transporte
-    Transporte transporte = new Transporte(idTransporte, marca, modelo, capacidad, condicionesGenerales, idUsuario);
-    
-    //  lógica para crear un viaje, como llamar a un servicio que maneje la lógica de negocio
-     agregarViaje(origen, destino, horaSalida, estado, transporte, precio);
+    //crear un viaje
+     agregarViaje(origen, destino, horaSalida, estado, idTransporte, precio);
     
     // Redirigir o enviar respuesta después de crear el viaje
     request.setAttribute("mensaje", "Viaje creado exitosamente.");
     request.getRequestDispatcher("resultado.jsp").forward(request, response);
     }
 
-    public void listarViajes(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public void listarViajes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    List<Viaje> viajes = viajeDAO.obtenerTodosLosViajes(); 
+    request.setAttribute("viajes", viajes); // Agregar la lista de viajes al request
+    request.getRequestDispatcher("listarViajes.jsp").forward(request, response); // Redirigir a la página JSP para mostrar los viajes
+}
 }
