@@ -13,11 +13,11 @@ import com.stcum.transporteservice.dao.TransporteDAO;
 public class TransporteService {
     private TransporteDAO tDAO;
 
-    public TransporteService(TransporteDAO tDAO) {
-        this.tDAO = tDAO;
+    public TransporteService() {
+        this.tDAO = new TransporteDAO();
     }
     
-    public void registrarTransporte(String tipovehiculo, int capacidad, String condicionesgenerales, double precio, int idUsuario){
-        tDAO.insertarTransporte(tipovehiculo, capacidad, condicionesgenerales, precio, idUsuario);
+    public void registrarTransporte(String tipovehiculo, int capacidad, String condicionesgenerales, int idUsuario){
+        tDAO.insertarTransporte(tipovehiculo, capacidad, condicionesgenerales, idUsuario);
     }
 }

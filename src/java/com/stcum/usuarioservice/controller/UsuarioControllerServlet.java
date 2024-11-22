@@ -20,80 +20,141 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "UsuarioControllerServlet", urlPatterns = {"/UsuarioControllerServlet"})
 public class UsuarioControllerServlet extends HttpServlet {
-    public class UsuarioLoginServlet extends HttpServlet {
-    private UsuarioServicio userService;
-    private UsuarioDTO uDTO;
 
-    public UsuarioLoginServlet() {
-        this.userService = new UsuarioServicio();
-        this.uDTO = new UsuarioDTO();
-         
-    }
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UsuarioControllerServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UsuarioControllerServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        private UsuarioServicio userService;
+        private UsuarioDTO uDTO;
+
+        public UsuarioControllerServlet() {
+            this.userService = new UsuarioServicio();
+            this.uDTO = new UsuarioDTO();
+
         }
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        /**
+         * Processes requests for both HTTP <code>GET</code> and
+         * <code>POST</code> methods.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet UsuarioLoginServlet</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Servlet UsuarioLoginServlet at " + request.getContextPath() + "</h1>");
+                out.println("</body>");
+                out.println("</html>");
+            }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            
+        }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        /**
+         * Handles the HTTP <code>GET</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+            processRequest(request, response);
+        }
 
-}
+        /**
+         * Handles the HTTP <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+
+            String action = request.getParameter("action");
+            switch (action) {
+                case "ingresar":
+                        
+                    ingresar(request, response);
+
+                    break;
+
+                case "conductorOfrecer":
+                    request.setAttribute("Usuario", uDTO.getUsuarioToSend());  
+
+                    //requestGetAttr(request);
+                    request.getRequestDispatcher("OfrecerServicio.jsp").forward(request, response);
+                    
+                    break;
+
+                case "conductorListar":
+                    requestGetAttr(request);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+
+        }
+
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo() {
+            return "Short description";
+        }// </editor-fold>
+        
+        private void requestGetAttr(HttpServletRequest request){
+
+        }
+        
+        private void ingresar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            String correo = request.getParameter("email");
+            String contrasena = request.getParameter("password");
+            uDTO.setUsuarioToSend(userService.loguear(correo, contrasena).getUsuarioToSend());
+            request.setAttribute("Usuario", uDTO.getUsuarioToSend());  
+
+            if (uDTO != null) {
+                switch (uDTO.getUsuarioToSend().getTipoUsuario()) {
+                    case 3://Pasajero          
+                        request.getRequestDispatcher("main.jsp").forward(request, response);
+                        break;
+                    case 2://Conductor
+                        request.getRequestDispatcher("mainConductor.jsp").forward(request, response);
+                        break;
+
+                    case 1://Admin
+
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+                
+            } else {
+                request.getRequestDispatcher("index.html").forward(request, response);
+
+            }
+
+            
+        }
+        
+        
+    
 }

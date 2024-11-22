@@ -19,11 +19,11 @@
 
             
             <form action="" method="POST">
-                <button type="submit">Ofrecer servicio</button>
+                <button type="submit" name="action" value="conductorOfrecer">Ofrecer servicio</button>
            
             </form>
             <form action="" method="POST">
-                <button type="submit">Listar mis servicios</button>
+                <button type="submit" name="action" value="conductorListar">Listar mis servicios</button>
             </form>
         </div>
     </body>
