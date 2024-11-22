@@ -18,7 +18,6 @@ public class DatabaseConnection {
     private static final String PASSWORD = "44IV100";
     private final Connection conn;
     
-
     public Connection getConn() {
         return conn;
     }
